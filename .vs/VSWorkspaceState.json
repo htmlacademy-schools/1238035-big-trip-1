@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\dist",
-    "\\src"
+    "\\src",
+    "\\src\\view"
   ],
-  "SelectedNode": "\\src\\main.js",
+  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
