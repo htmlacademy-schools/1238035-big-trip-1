@@ -1,4 +1,3 @@
-
 parserOptions:
   ecmaVersion: 2018
   sourceType: 'module'
@@ -8,5 +7,4 @@ env:
   browser: true
 
 extends: 'htmlacademy/vanilla'
-
 parser: '@babel/eslint-parser'
