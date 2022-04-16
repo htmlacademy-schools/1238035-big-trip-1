@@ -1,8 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dist",
     "\\src",
+    "\\src\\mock",
     "\\src\\view"
   ],
   "SelectedNode": "\\package.json",
