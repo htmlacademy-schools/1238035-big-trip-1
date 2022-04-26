@@ -2,6 +2,7 @@
 
 * Студент: [Дарья  Панова](https://up.htmlacademy.ru/js2-urfu/1/user/1238035).
 * Наставник: [Владислав Зубко](https://htmlacademy.ru/profile/id573447).
+ 
 
 ---
 
