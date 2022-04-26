@@ -1,8 +1,8 @@
-import { createElement } from '../render';
+import {createElement} from '../render';
 import dayjs from 'dayjs';
 
 const createTripEventsItemTemplate = (tripEvent) => {
-  const { eventType, location, price, startDate, endDate, duration, offers, isFavorite } = tripEvent;
+  const {eventType, location, price, startDate, endDate, duration, offers, isFavorite} = tripEvent;
   const startDay = dayjs(startDate).format('MMM D');
   const beginDate = dayjs(startDate).format('YYYY-MM-D');
   const startTime = dayjs(startDate).format('HH:mm');

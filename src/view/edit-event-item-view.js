@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
-import { locations } from '../mock/locations';
-import { eventTypes } from '../mock/event-types';
-import { createElement } from '../render';
+import {locations} from '../mock/locations';
+import {eventTypes} from '../mock/event-types';
+import {createElement} from '../render';
 
 const createEventItemEditTemplate = (tripEvent) => {
-  const { eventType, price, location, startDate, endDate, offers, description } = tripEvent;
+  const {eventType, price, location, startDate, endDate, offers, description} = tripEvent;
   const startDatetime = dayjs(startDate).format('D/MM/YY HH:mm ');
   const endDatetime = dayjs(endDate).format('D/MM/YY HH:mm');
 

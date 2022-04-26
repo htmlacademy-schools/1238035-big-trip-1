@@ -1,4 +1,4 @@
-import { render, RenderPosition } from './render.js';
+import {render, RenderPosition} from './render.js';
 import TripTabsView from './view/trip-tabs-view.js';
 import TripFiltersView from './view/trip-filters-view.js';
 import TripSortView from './view/trip-sort-view.js';
@@ -6,12 +6,12 @@ import AddEventItemView from './view/add-event-item-view.js';
 import EventItemEditView from './view/edit-event-item-view';
 import TripEventItemView from './view/trip-event-item-view.js';
 import EventsListView from './view/events-list-view.js';
-import { generateTripEvent } from './mock/trip-event';
+import {generateTripEvent} from './mock/trip-event';
 import NoTripEventsView from './view/no-trip-events-view';
 
 const TRIP_EVENTS_COUNT = 18;
 
-const tripEvents = Array.from({ length: TRIP_EVENTS_COUNT }, generateTripEvent);
+const tripEvents = Array.from({length: TRIP_EVENTS_COUNT}, generateTripEvent);
 
 const tripControlsNavigationElement = document.querySelector('.trip-controls__navigation');
 const tripControlsFiltersElement = document.querySelector('.trip-controls__filters');

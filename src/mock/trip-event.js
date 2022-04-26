@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { locations } from './locations';
+import {locations} from './locations';
 
 const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));

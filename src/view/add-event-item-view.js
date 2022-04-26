@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
-import { locations } from '../mock/locations';
-import { eventTypes } from '../mock/event-types';
-import { createElement } from '../render';
+import {locations} from '../mock/locations';
+import {eventTypes} from '../mock/event-types';
+import {createElement} from '../render';
 
 const createAddEventItemTemplate = (tripEvent) => {
-  const { offers: offers, description, photos } = tripEvent;
+  const {offers: offers, description, photos} = tripEvent;
   const eventType = 'check-in';
   const templateDatetime = dayjs().add(17, 'day').hour(12).minute(0).format('D/MM/YY HH:mm');
   const createOfferMarkup = (offer) => {
-    const { offers: name, type, price } = offer;
+    const {offers: name, type, price} = offer;
     return `<div class="event__available-offers">
                       <div class="event__offer-selector">
                         <input class="event__offer-checkbox  visually-hidden" id="event-offer-${type}-1" type="checkbox" name="event-offer-${type}" >
