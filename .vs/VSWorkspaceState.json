@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\src",
+    "\\src\\mock",
+    "\\src\\view"
   ],
-  "SelectedNode": "\\webpack.config.js",
+  "SelectedNode": "\\src\\main.js",
   "PreviewInSolutionExplorer": false
 }

@@ -72,6 +72,7 @@ const createTripEventsItemTemplate = (tripEvent) => {
               </div>
             </li>`;
 };
+
 export default class TripEventItemView {
   #element = null;
   #event = null;
