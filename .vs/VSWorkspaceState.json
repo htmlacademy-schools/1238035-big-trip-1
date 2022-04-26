@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dist",
     "\\src",
     "\\src\\view"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\view\\no-trip-events-view.js",
   "PreviewInSolutionExplorer": false
 }
