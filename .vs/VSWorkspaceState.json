@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
-    "\\src\\view"
+    "\\src"
   ],
-  "SelectedNode": "\\src\\view\\no-trip-events-view.js",
+  "SelectedNode": "\\webpack.config.js",
   "PreviewInSolutionExplorer": false
 }
