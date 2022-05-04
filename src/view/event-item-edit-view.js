@@ -5,15 +5,14 @@ import { createElement } from '../render';
 
 const createEventItemEditTemplate = (tripEvent) => {
   const { eventType, price, location, startDate, endDate, offers, description } = tripEvent;
-  const startDatetime = dayjs(startDate).format('D/MM/YY HH:mm ');
-  const endDatetime = dayjs(endDate).format('D/MM/YY HH:mm');
+  const startDatetime = dayjs(startDate).format('DD/MM/YY HH:mm ');
+  const endDatetime = dayjs(endDate).format('DD/MM/YY HH:mm');
 
   const createOfferMarkup = (offer) => {
     const isChecked = offer.isChosen ? ' checked=""' : '';
     const offerName = offer.name;
     const offerPrice = offer.price;
     const offerType = offer.type;
-
     return `<div class="event__available-offers">
                       <div class="event__offer-selector">
                         <input class="event__offer-checkbox  visually-hidden" id="event-offer-${offerType}-1" type="checkbox" name="event-offer-${offerType}"${isChecked}>
@@ -25,7 +24,6 @@ const createEventItemEditTemplate = (tripEvent) => {
                       </div>
     `;
   };
-
   const createOffersListMarkup = (editedOffers) => {
     if (editedOffers.length !== 0) {
       return `<section class="event__section  event__section--offers">
@@ -33,7 +31,6 @@ const createEventItemEditTemplate = (tripEvent) => {
     }
     return '';
   };
-
   const createLocationOption = (city) => (`<option value="${city}"></option>`);
   const createEventTypesMarkup = (types = eventTypes(), chosenEventType) => {
     const createType = (currentType) => {

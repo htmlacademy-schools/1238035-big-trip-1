@@ -3,10 +3,10 @@ import { locations } from '../mock/locations';
 import { eventTypes } from '../mock/event-types';
 import { createElement } from '../render';
 
-const createAddEventItemTemplate = (tripEvent) => {
-  const { offers: offers, description, photos } = tripEvent;
+const createEventItemAddTemplate = (tripEvent) => {
+  const { offers, description, photos } = tripEvent;
   const eventType = 'check-in';
-  const templateDatetime = dayjs().add(17, 'day').hour(12).minute(0).format('D/MM/YY HH:mm');
+  const templateDatetime = dayjs().add(14, 'day').hour(10).minute(0).format('DD/MM/YY HH:mm');
 
   const createOfferMarkup = (offer) => {
     const offerName = offer.name;
@@ -23,7 +23,6 @@ const createAddEventItemTemplate = (tripEvent) => {
                       </div>
     `;
   };
-
   const createOffersListMarkup = (addableOffers) => {
     if (addableOffers.length !== 0) {
       return `<section class="event__section  event__section--offers">
@@ -45,6 +44,7 @@ const createAddEventItemTemplate = (tripEvent) => {
     };
     return types.map(createType).join('');
   };
+
   const addableOffersMarkup = createOffersListMarkup(offers);
   const photosList = photos.map(createPhotoMarkup).join('');
   const locationOptions = locations().map(createLocationOption).join('');
@@ -93,9 +93,7 @@ const createAddEventItemTemplate = (tripEvent) => {
                   <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
                   <button class="event__reset-btn" type="reset">Cancel</button>
                 </header>
-                <section class="event__details">
-                  ${addableOffersMarkup}
-                  <section class="event__section  event__section--destination">
+                <section class="event__details">${addableOffersMarkup}<section class="event__section  event__section--destination">
                     <h3 class="event__section-title  event__section-title--destination">Destination</h3>
                     <p class="event__destination-description">${description}</p>
                     <div class="event__photos-container">
@@ -109,7 +107,7 @@ const createAddEventItemTemplate = (tripEvent) => {
             </li>`;
 };
 
-export default class AddEventItemView {
+export default class EventItemAddView {
   #element = null;
   #event = null;
 
@@ -126,7 +124,7 @@ export default class AddEventItemView {
   }
 
   get template() {
-    return createAddEventItemTemplate(this.#event);
+    return createEventItemAddTemplate(this.#event);
   }
 
   removeElement() {
