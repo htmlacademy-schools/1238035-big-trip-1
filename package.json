@@ -1,4 +1,5 @@
-{ "name": "big-trip",
+{
+  "name": "big-trip",
   "version": "16.0.0",
   "private": true,
   "description": "Проект «Большое путешествие» от HTML Academy",
