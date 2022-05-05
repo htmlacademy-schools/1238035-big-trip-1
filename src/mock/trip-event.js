@@ -68,10 +68,10 @@ const generateDescription = () => {
     'Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. ' +
     'Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.'
   ];
+
   const randomIndex = getRandomInteger(0, description.length - 1);
 
   return description[randomIndex];
-
 };
 const generatePhotos = () => {
   const resultPhotosArray = [];
@@ -85,20 +85,14 @@ const generatePrice = () => getRandomInteger(1, 100) * 10;
 const generateOffers = () => {
   const offers = [
     {
-      name: 'Switch to business class',
-      price: 200,
-      isChosen: Boolean(getRandomInteger(0, 1)),
-      type: 'flight'
-    },
-    {
       name: 'Add luggage',
       price: 30,
       isChosen: Boolean(getRandomInteger(0, 1)),
       type: 'luggage'
     },
     {
-      name: 'Choose seats',
-      price: 5,
+      name: 'Switch to comfort class',
+      price: 100,
       isChosen: Boolean(getRandomInteger(0, 1)),
       type: 'flight'
     },
@@ -109,26 +103,32 @@ const generateOffers = () => {
       type: 'meal'
     },
     {
-      name: 'Rent a car',
-      price: 150,
+      name: 'Choose seats',
+      price: 5,
       isChosen: Boolean(getRandomInteger(0, 1)),
-      type: 'car'
+      type: 'flight'
     },
     {
       name: 'Travel by train',
-      price: 10,
+      price: 40,
       isChosen: Boolean(getRandomInteger(0, 1)),
       type: 'transport'
     },
     {
+      name: 'Rent a car',
+      price: 200,
+      isChosen: Boolean(getRandomInteger(0, 1)),
+      type: 'car'
+    },
+    {
       name: 'Add breakfast',
-      price: 15,
+      price: 40,
       isChosen: Boolean(getRandomInteger(0, 1)),
       type: 'meal'
     },
     {
-      name: 'Branch in city',
-      price: 30,
+      name: 'Lunch in city',
+      price: 55,
       isChosen: Boolean(getRandomInteger(0, 1)),
       type: 'meal'
     },
