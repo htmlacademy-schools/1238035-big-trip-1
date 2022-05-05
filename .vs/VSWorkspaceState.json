@@ -1,10 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
     "\\src\\mock",
     "\\src\\view"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\src\\view\\event-add-view.js",
   "PreviewInSolutionExplorer": false
 }

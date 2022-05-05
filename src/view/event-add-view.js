@@ -3,10 +3,10 @@ import { locations } from '../mock/locations';
 import { eventTypes } from '../mock/event-types';
 import { createElement } from '../render';
 
-const createEventItemAddTemplate = (tripEvent) => {
+const createEventAddTemplate = (tripEvent) => {
   const { offers, description, photos } = tripEvent;
   const eventType = 'check-in';
-  const templateDatetime = dayjs().add(14, 'day').hour(10).minute(0).format('DD/MM/YY HH:mm');
+  const templateDatetime = dayjs().add(14, 'day').hour(0).minute(0).format('DD/MM/YY HH:mm');
 
   const createOfferMarkup = (offer) => {
     const offerName = offer.name;
@@ -107,12 +107,12 @@ const createEventItemAddTemplate = (tripEvent) => {
             </li>`;
 };
 
-export default class EventItemAddView {
+export default class EventAddView {
   #element = null;
-  #event = null;
+  #tripEvent = null;
 
   constructor(event) {
-    this.#event = event;
+    this.#tripEvent = event;
   }
 
   get element() {
@@ -124,7 +124,7 @@ export default class EventItemAddView {
   }
 
   get template() {
-    return createEventItemAddTemplate(this.#event);
+    return createEventAddTemplate(this.#tripEvent);
   }
 
   removeElement() {
