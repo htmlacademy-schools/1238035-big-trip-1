@@ -4,8 +4,9 @@
     "\\public",
     "\\src",
     "\\src\\mock",
+    "\\src\\utils",
     "\\src\\view"
   ],
-  "SelectedNode": "\\src\\view\\event-add-view.js",
+  "SelectedNode": "\\src\\utils",
   "PreviewInSolutionExplorer": false
 }
