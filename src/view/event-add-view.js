@@ -1,10 +1,11 @@
 import dayjs from 'dayjs';
 import { destinations } from '../mock/destinations';
+import { offers } from '../mock/offers';
 import AbstractView from './abstract-view';
 import { createOffersSectionMarkup, createPointTypesMarkup } from '../utils/forms';
 
 const createPointAddTemplate = (tripPoint) => {
-  const { description, photos } = tripPoint;
+  const { offers, description, photos } = tripPoint;
   const pointType = 'check-in';
   const templateDatetime = dayjs().add(14, 'day').hour(0).minute(0).format('DD/MM/YY HH:mm');
   const photosList = photos.map((x) => (`<img className="event__photo" src="${x}">`)).join('');
