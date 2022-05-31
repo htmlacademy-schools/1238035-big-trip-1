@@ -3,16 +3,24 @@ import { destinations } from '../mock/destinations';
 import { offers } from '../mock/offers';
 import SmartView from './smart-view';
 import { createPointTypesMarkup, createOffersSectionMarkup } from '../utils/forms';
+import flatpickr from 'flatpickr';
+
+import '../../node_modules/flatpickr/dist/flatpickr.min.css';
 
 const createPointEditTemplate = (point) => {
 
   const { basePrice: price, dateFrom: ISOFrom, dateTo: ISOTo, destination, type } = point;
-  const datetimeFrom = dayjs(ISOFrom).format('DD/MM/YY HH:mm ');
-  const datetimeTo = dayjs(ISOTo).format('DD/MM/YY HH:mm');
+
+  const DatetimeFrom = dayjs(ISOFrom).format('DD/MM/YY HH:mm ');
+  const DatetimeTo = dayjs(ISOTo).format('DD/MM/YY HH:mm');
+
   const pointTypeLabel = type.charAt(0).toUpperCase() + type.slice(1);
+
   const pointTypesMarkup = createPointTypesMarkup(offers(), type);
   const destinationOptions = destinations().map((x) => (`<option value="${x.name}"></option>`)).join('');
+
   const photosMarkup = destination.pictures.map((x) => (`<img className="event__photo" src="${x.src}" alt="${x.description}">`)).join('');
+
   const editedOffersMarkup = createOffersSectionMarkup(offers(), type);
 
   return `<li class="trip-events__item">
@@ -42,10 +50,10 @@ const createPointEditTemplate = (point) => {
                   </div>
                   <div class="event__field-group  event__field-group--time">
                     <label class="visually-hidden" for="event-start-time-1">From</label>
-                    <input class="event__input  event__input--time event__input-start-time" id="event-start-time-1" type="text" name="event-start-time" value="${datetimeFrom}">
+                    <input class="event__input  event__input--time event__input-start-time" id="event-start-time-1" type="text" name="event-start-time" value="${DatetimeFrom}">
                     —
                     <label class="visually-hidden" for="event-end-time-1">To</label>
-                    <input class="event__input  event__input--time event__input-end-time" id="event-end-time-1" type="text" name="event-end-time" value="${datetimeTo}">
+                    <input class="event__input  event__input--time event__input-end-time" id="event-end-time-1" type="text" name="event-end-time" value="${DatetimeTo}">
                   </div>
                   <div class="event__field-group  event__field-group--price">
                     <label class="event__label" for="event-price-1">
@@ -77,16 +85,32 @@ const createPointEditTemplate = (point) => {
 };
 
 export default class PointEditView extends SmartView {
+  #datepickerFrom = null;
+  #datepickerTo = null;
 
   constructor(point) {
     super();
     this._data = PointEditView.parsePointToData(point);
 
     this.#setInnerHandlers();
+    this.#setDatepicker();
   }
 
   get template() {
     return createPointEditTemplate(this._data);
+  }
+
+  removeElement = () => {
+    super.removeElement();
+
+    if (this.#datepickerFrom) {
+      this.#datepickerFrom.destroy();
+      this.#datepickerFrom = null;
+    }
+    if (this.#datepickerTo) {
+      this.#datepickerTo.destroy();
+      this.#datepickerTo = null;
+    }
   }
 
   reset = (point) => {
@@ -95,8 +119,42 @@ export default class PointEditView extends SmartView {
     );
   }
 
+  #setDatepicker = () => {
+    this.#datepickerFrom = flatpickr(
+      this.element.querySelector('.event__input-start-time'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/y H:i',
+        defaultDate: this._data.dateFrom,
+        onChange: this.#dateFromChangeHandler
+      },
+    );
+    this.#datepickerTo = flatpickr(
+      this.element.querySelector('.event__input-end-time'),
+      {
+        enableTime: true,
+        dateFormat: 'd/m/y H:i',
+        defaultDate: this._data.dateTo,
+        onChange: this.#dateToChangeHandler
+      },
+    );
+  }
+
+  #dateFromChangeHandler = ([userDate]) => {
+    this.updateData({
+      dateFrom: userDate.toISOString(),
+    });
+  }
+
+  #dateToChangeHandler = ([userDate]) => {
+    this.updateData({
+      dateTo: userDate.toISOString(),
+    });
+  }
+
   restoreHandlers = () => {
     this.#setInnerHandlers();
+    this.#setDatepicker();
     this.setRollupClickHandler(this._callback.rollupClick);
     this.setFormSubmitHandler(this._callback.formSubmit);
   }
@@ -169,6 +227,15 @@ export default class PointEditView extends SmartView {
     this._callback.formSubmit();
     this._callback.formSubmit(this._data);
     this._callback.formSubmit(PointEditView.parseDataToPoint(this._data));
+  }
+
+  static parsePointToData = (point) => ({
+    ...point,
+  });
+
+  static parseDataToPoint = (data) => {
+    const point = { ...data };
+    return point;
   }
 
   #getChangedDestination = (destinationName) => {
