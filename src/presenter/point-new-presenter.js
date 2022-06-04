@@ -1,19 +1,23 @@
+import PointAddView from '../view/point-add-view.js';
 import { nanoid } from 'nanoid';
 import { remove, render, RenderPosition } from '../utils/render.js';
-import { UserAction, UpdateType } from '../utils/const';
-import PointAddView from '../view/point-add-view';
+import { UserAction, UpdateType } from '../utils/const.js';
+
 
 export default class PointNewPresenter {
   #pointListContainer = null;
   #changeData = null;
   #pointAddComponent = null;
+  #destroyCallback = null;
 
   constructor(pointListContainer, changeData) {
     this.#pointListContainer = pointListContainer;
     this.#changeData = changeData;
   }
 
-  init = () => {
+  init = (callback) => {
+    this.#destroyCallback = callback;
+
     if (this.#pointAddComponent !== null) {
       return;
     }
@@ -32,17 +36,18 @@ export default class PointNewPresenter {
       return;
     }
 
+    this.#destroyCallback?.();
     remove(this.#pointAddComponent);
     this.#pointAddComponent = null;
 
     document.removeEventListener('keydown', this.#escKeyDownHandler);
   }
 
-  #handleFormSubmit = (task) => {
+  #handleFormSubmit = (point) => {
     this.#changeData(
       UserAction.ADD_POINT,
       UpdateType.MINOR,
-      { id: nanoid(), ...task },
+      { id: nanoid(), ...point },
     );
     this.destroy();
   }
