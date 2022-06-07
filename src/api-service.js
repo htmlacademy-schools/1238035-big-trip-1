@@ -15,17 +15,17 @@ export default class ApiService {
   }
 
   get points() {
-    return this.#load({url: 'points'})
+    return this.#load({ url: 'points' })
       .then(ApiService.parseResponse);
   }
 
   get offers() {
-    return this.#load({url: 'offers'})
+    return this.#load({ url: 'offers' })
       .then(ApiService.parseResponse);
   }
 
   get destinations() {
-    return this.#load({url: 'destinations'})
+    return this.#load({ url: 'destinations' })
       .then(ApiService.parseResponse);
   }
 
@@ -34,12 +34,10 @@ export default class ApiService {
       url: `points/${point.id}`,
       method: Method.PUT,
       body: JSON.stringify(this.#adaptToServer(point)),
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
     });
 
-    const parsedResponse = await ApiService.parseResponse(response);
-
-    return parsedResponse;
+    return await ApiService.parseResponse(response);
   }
 
   addPoint = async (point) => {
@@ -47,12 +45,10 @@ export default class ApiService {
       url: 'points',
       method: Method.POST,
       body: JSON.stringify(this.#adaptToServer(point)),
-      headers: new Headers({'Content-Type': 'application/json'}),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
     });
 
-    const parsedResponse = await ApiService.parseResponse(response);
-
-    return parsedResponse;
+    return await ApiService.parseResponse(response);
   }
 
   deletePoint = async (point) => {
@@ -74,7 +70,7 @@ export default class ApiService {
 
     const response = await fetch(
       `${this.#endPoint}/${url}`,
-      {method, body, headers},
+      { method, body, headers },
     );
 
     try {
@@ -86,7 +82,8 @@ export default class ApiService {
   }
 
   #adaptToServer = (point) => {
-    const adaptedPoint = {...point,
+    const adaptedPoint = {
+      ...point,
       'base_price': point.basePrice,
       'date_from': point.dateFrom,
       'date_to': point.dateTo,
