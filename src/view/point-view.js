@@ -1,15 +1,17 @@
 import dayjs from 'dayjs';
 import AbstractView from './abstract-view';
-import { offers } from '../mock/offers';
 
 const createPointTemplate = (point) => {
-  const { basePrice: price, dateFrom: ISOFrom, dateTo: ISOTo, destination, isFavorite: isFavorite, type } = point;
+  const { basePrice: price, dateFrom: ISOFrom, dateTo: ISOTo, offers, destination, isFavorite, type } = point;
 
   const destinationName = destination.name;
+
   const dayFrom = dayjs(ISOFrom).format('MMM D');
   const dateFrom = dayjs(ISOFrom).format('YYYY-MM-DD');
+
   const TimeFrom = dayjs(ISOFrom).format('HH:mm');
   const DatetimeFrom = dayjs(ISOFrom).format('YYYY-MM-DDTHH:mm');
+
   const TimeTo = dayjs(ISOTo).format('HH:mm');
   const DatetimeTo = dayjs(ISOTo).format('YYYY-MM-DDTHH:mm');
 
@@ -45,29 +47,21 @@ const createPointTemplate = (point) => {
   };
 
   const duration = getDuration(ISOFrom, ISOTo);
+
   const isFavoriteClass = isFavorite ? ' event__favorite-btn--active' : '';
 
-  const CreateOffers = (pointType, offersByTypes) => {
+  const CreateOffers = (checkedOffers) => {
 
-    const createOfferMarkup = (offer) => `<li class="event__offer">
+    const createOfferMarkup = (offer) => (offer.isChosen ? `<li class="event__offer">
                     <span class="event__offer-title">${offer.title}</span>
                     &plus;&euro;&nbsp;
                     <span class="event__offer-price">${offer.price}</span>
-                  </li>`;
+                  </li>` : '');
 
-    let offersByCurrentType = [];
-
-    for (let i = 0; i < offersByTypes.length; i++) {
-      if (offersByTypes[i].type === pointType) {
-        offersByCurrentType = offersByTypes[i].offers;
-      }
-    }
-
-    return offersByCurrentType.map(createOfferMarkup).join('');
+    return checkedOffers.map(createOfferMarkup).join('');
   };
 
-
-  const offersMarkup = CreateOffers(type, offers());
+  const OffersMarkup = CreateOffers(offers);
 
   return `<li class="trip-events__item">
               <div class="event">
@@ -88,7 +82,7 @@ const createPointTemplate = (point) => {
                   &euro;&nbsp;<span class="event__price-value">${price}</span>
                 </p>
                 <h4 class="visually-hidden">Offers:</h4>
-                <ul class="event__selected-offers">${offersMarkup}</ul>
+                <ul class="event__selected-offers">${OffersMarkup}</ul>
                 <button class="event__favorite-btn${isFavoriteClass}" type="button">
                   <span class="visually-hidden">Add to favorite</span>
                   <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
